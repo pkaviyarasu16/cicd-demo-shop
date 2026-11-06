@@ -1,5 +1,5 @@
 // A tiny shop: just enough code for a CI/CD demo.
-export const buttonLabel = 'Buy now';
+export const buttonLabel = 'Add to cart';
 
 export function addToCart(cart, item) {
   return [...cart, item];
