@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: shop
+spec:
+  replicas: 3
+  selector:
+    matchLabels: { app: shop }
+  strategy:
+    type: RollingUpdate
+    rollingUpdate: { maxUnavailable: 0, maxSurge: 1 }
+  template:
+    metadata:
+      labels: { app: shop }
+    spec:
+      imagePullSecrets: [{ name: ghcr }]
+      containers:
+        - name: shop
+          image: IMAGE
+          ports: [{ containerPort: 3000 }]
+          readinessProbe:
+            httpGet: { path: /healthz, port: 3000 }
+            periodSeconds: 2
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: shop
+spec:
+  selector: { app: shop }
+  ports: [{ port: 80, targetPort: 3000 }]
