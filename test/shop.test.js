@@ -10,8 +10,8 @@ test('shows the price', () => {
   assert.equal(formatPrice(1299), '$12.99');
 });
 
-test('button says "Buy now"', () => {
-  assert.equal(buttonLabel, 'Buy now');
+test('button says "Add to cart"', () => {
+  assert.equal(buttonLabel, 'Add to cart');
 });
 
 test('checkout opens', () => {
